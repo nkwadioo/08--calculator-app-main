@@ -19,10 +19,11 @@ $theme1-grayKeyShadow-bg: hsl(28, 16%, 65%);
 body {
     background-color: $theme1-main-bg;
     color: white;
+    font-family: sans-serif;
 }
 
 .wrapper {
-    max-width: 300px;
+    max-width: 270px;
     margin: 2rem auto;
 }
 
@@ -30,6 +31,11 @@ header {
     display: grid;
     grid-template-columns: 100px 1fr;
     align-items: self-end;
+
+    h3 {
+        font-size: 30px;
+        font-weight: 400;
+    }
 }
 
 .themeWrapper {
@@ -38,6 +44,11 @@ header {
     gap: 1.5rem;
     align-items: self-end;
     text-transform: uppercase;
+    height: 40px;
+
+    label, input {
+        cursor: pointer;
+    }
 
     p {
         letter-spacing: 1px;
@@ -53,15 +64,16 @@ header {
         text-align: center;
         align-items: center;
         justify-items: center;
-        position: relative;;
-        
+        position: relative;
+        margin-top: -3px;
+        align-self: stretch;
 
         &::after {
             content: '';
             position: absolute;
             width: 100%;
-            height: 1.2rem;
-            bottom: -2.3px;
+            height: 1.3rem;
+            bottom: -1.3px;
             left: 0;
             right: 0;
             background-color: $theme1-keypad-bg;
@@ -73,7 +85,7 @@ header {
     }
 }
 
-.screenWrapper {
+.screen {
     margin-top: 1rem;
     background-color: $theme1-screen-bg;
     min-height: 75px;
@@ -81,8 +93,9 @@ header {
     display: flex;
     justify-content: end;
     align-items: center;
-
+    font-size: 30px;
     padding-right: 1rem;
+    font-weight: 700;
 }
 
 .calculator {
@@ -94,7 +107,6 @@ header {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: repeat(30px, 5);
     gap: 10px;
-    text-transform: uppercase;
 }
 
 .addOns {
@@ -105,13 +117,14 @@ header {
     padding: 1rem;
     border-radius: 5px;
     text-align: center;
-
+    cursor: pointer;
 
     &.white {
         background-color: $theme1-grayKey-bg;
         color: $theme1-keypad-bg;
         font-weight: bold;
-        box-shadow: inset 0px -2px $theme1-grayKeyShadow-bg;
+        box-shadow: inset 0px -4px $theme1-grayKeyShadow-bg;
+        font-weight: 700;
     }
     
     &.reset {
@@ -119,17 +132,24 @@ header {
     }
     &.equalTo {
         background-color: $theme1-redKey-bg;
-        box-shadow: inset 0px -2px $theme1-redKeyShadow-bg;
+        box-shadow: inset 0px -4px $theme1-redKeyShadow-bg;
         grid-column: 3 / -1;
+        font-weight: 700;
     }
 
     &.del {
-        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 300;
+        padding: 0.5rem;
     }
 
-    &.del, &.reset {
+    &.accent {
+        text-transform: uppercase;
         background-color: $theme1-key-bg;
-        box-shadow: inset 0px -2px $theme1-keyShadow-bg;
+        box-shadow: inset 0px -4px $theme1-keyShadow-bg;
     }
     
 }

@@ -8,10 +8,11 @@
 body {
   background-color: #3a4764;
   color: white;
+  font-family: sans-serif;
 }
 
 .wrapper {
-  max-width: 300px;
+  max-width: 270px;
   margin: 2rem auto;
 }
 
@@ -23,6 +24,11 @@ header {
   -webkit-box-align: self-end;
       -ms-flex-align: self-end;
           align-items: self-end;
+}
+
+header h3 {
+  font-size: 30px;
+  font-weight: 400;
 }
 
 .themeWrapper {
@@ -37,6 +43,11 @@ header {
       -ms-flex-align: self-end;
           align-items: self-end;
   text-transform: uppercase;
+  height: 40px;
+}
+
+.themeWrapper label, .themeWrapper input {
+  cursor: pointer;
 }
 
 .themeWrapper p {
@@ -60,14 +71,17 @@ header {
           align-items: center;
   justify-items: center;
   position: relative;
+  margin-top: -3px;
+  -ms-grid-row-align: stretch;
+      align-self: stretch;
 }
 
 .themeWrapper .theme::after {
   content: '';
   position: absolute;
   width: 100%;
-  height: 1.2rem;
-  bottom: -2.3px;
+  height: 1.3rem;
+  bottom: -1.3px;
   left: 0;
   right: 0;
   background-color: #232c43;
@@ -76,7 +90,7 @@ header {
   padding: 5px;
 }
 
-.screenWrapper {
+.screen {
   margin-top: 1rem;
   background-color: #182034;
   min-height: 75px;
@@ -90,7 +104,9 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 30px;
   padding-right: 1rem;
+  font-weight: 700;
 }
 
 .calculator {
@@ -105,7 +121,6 @@ header {
   -ms-grid-rows: (5)[30px];
       grid-template-rows: repeat(30px, 5);
   gap: 10px;
-  text-transform: uppercase;
 }
 
 .addOns {
@@ -116,14 +131,16 @@ header {
   padding: 1rem;
   border-radius: 5px;
   text-align: center;
+  cursor: pointer;
 }
 
 .btn.white {
   background-color: #eae3dc;
   color: #232c43;
   font-weight: bold;
-  -webkit-box-shadow: inset 0px -2px #b4a597;
-          box-shadow: inset 0px -2px #b4a597;
+  -webkit-box-shadow: inset 0px -4px #b4a597;
+          box-shadow: inset 0px -4px #b4a597;
+  font-weight: 700;
 }
 
 .btn.reset {
@@ -134,18 +151,31 @@ header {
 
 .btn.equalTo {
   background-color: #d03f2f;
-  -webkit-box-shadow: inset 0px -2px #93261a;
-          box-shadow: inset 0px -2px #93261a;
+  -webkit-box-shadow: inset 0px -4px #93261a;
+          box-shadow: inset 0px -4px #93261a;
   grid-column: 3 / -1;
+  font-weight: 700;
 }
 
 .btn.del {
-  font-size: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 13px;
+  font-weight: 300;
+  padding: 0.5rem;
 }
 
-.btn.del, .btn.reset {
+.btn.accent {
+  text-transform: uppercase;
   background-color: #637097;
-  -webkit-box-shadow: inset 0px -2px #404e72;
-          box-shadow: inset 0px -2px #404e72;
+  -webkit-box-shadow: inset 0px -4px #404e72;
+          box-shadow: inset 0px -4px #404e72;
 }
 /*# sourceMappingURL=style.css.map */
