@@ -73,11 +73,11 @@ function doAction(value, classList) {
     }
 
     if (classList.contains('del')) {
-        if (variable2) {
+        if (variable2 !== '') {
             variable2 = variable2.substring(0, variable2.length - 1);
             return screen.innerHTML = variable2 || '0';
         }
-        if (variable1) {
+        if (variable1 !== '') {
             variable1 = variable1.substring(0, variable1.length - 1);
             return screen.innerHTML = variable1 || '0';
         }
