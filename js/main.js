@@ -1,10 +1,23 @@
 "use strict";
 const buttons = document.querySelectorAll('.btn');
 const screen = document.querySelector('.screen');
+const themes = document.querySelectorAll('.theme input');
+const themeColor = localStorage.getItem('theme');
 let variable1 = '';
 let variable2 = '';
 let operant = '';
 let hasOperation = false;
+
+if (themeColor) {
+    if (themeColor !== 'theme1') {
+        const radioBtn = document.getElementById(themeColor);
+        radioBtn?.click();
+        document.body.classList.forEach( list => {
+            document.body.classList.remove(list);
+        });
+        document.body.classList.add(themeColor);
+    }
+}
 
 function calculate() {
     if(!variable2) {
@@ -87,6 +100,10 @@ function doAction(value, classList) {
 
 function input(event) {
     const button = event.target;
+    button.classList.add('press');
+    setTimeout(() => {
+        button.classList.remove('press'); 
+    }, 100);
     const value = event.target.innerHTML;
     const classList = button.classList;
     if (classList.contains('num')) {
@@ -99,6 +116,30 @@ function input(event) {
     // console.log(event, classList)
 }
 
+function changeTheme(event) {
+    const radioButton = event.target;
+    const value = radioButton.value;
+    document.body.classList.forEach( list => {
+        document.body.classList.remove(list);
+    });
+    document.body.classList.add(value);
+    localStorage.setItem('theme', value);
+}
+
 buttons.forEach( button => {
     button?.addEventListener('click', input);
 });
+
+themes.forEach( radioBtn => {
+    radioBtn.addEventListener('click', changeTheme);
+})
+
+// add number and symbol event listers
+
+document.addEventListener('keydown', (event) => {
+    console.log(event);
+    const eventCode = event.code.toLocaleLowerCase();
+    if (eventCode.includes('digit') || eventCode.includes('numpad') || eventCode == 'enter') {
+        insetValue(event.key)
+    }
+})

@@ -1,3 +1,17 @@
+:root {
+  --theme-main-bg: hsl(222, 26%, 31%);
+  --theme-keypad-bg: hsl(223, 31%, 20%);
+  --theme-screen-bg: hsl(224, 36%, 15%);
+  --theme-key-bg: hsl(225, 21%, 49%);
+  --theme-keyShadow-bg: hsl(224, 28%, 35%);
+  --theme-altKey-bg: hsl(6, 63%, 50%);
+  --theme-alsKeyShadow-bg: hsl(6, 70%, 34%);
+  --theme-accentKey-bg: hsl(30, 25%, 89%);
+  --theme-accentKeyShadow-bg: hsl(28, 16%, 65%);
+  --theme-text1: hsl(221, 14%, 31%);
+  --theme-text2: hsl(0, 0%, 100%);
+}
+
 *, *::before, *::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -6,9 +20,9 @@
 }
 
 body {
-  background-color: #3a4764;
-  color: white;
+  background-color: var(--theme-main-bg);
   font-family: sans-serif;
+  color: var(--theme-text2);
 }
 
 .wrapper {
@@ -62,14 +76,6 @@ header h3 {
   min-width: 80px;
   min-height: 1rem;
   gap: .3rem;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  text-align: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  justify-items: center;
   position: relative;
   margin-top: -3px;
   -ms-grid-row-align: stretch;
@@ -84,15 +90,49 @@ header h3 {
   bottom: -1.3px;
   left: 0;
   right: 0;
-  background-color: #232c43;
+  background-color: var(--theme-keypad-bg);
   z-index: -1;
   border-radius: 10px;
   padding: 5px;
 }
 
+.themeWrapper .theme input {
+  display: none;
+}
+
+.themeWrapper .theme label {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  place-content: center;
+}
+
+.themeWrapper .theme label div {
+  -ms-grid-row: 2;
+  grid-row: 2;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  margin-top: 7px;
+}
+
+.theme1 input:checked + div {
+  background-color: var(--theme-altKey-bg);
+}
+
+.theme2 input:checked + div {
+  background-color: var(--theme-altKey-bg);
+}
+
+.theme3 input:checked + div {
+  background-color: var(--theme-altKey-bg);
+}
+
 .screen {
   margin-top: 1rem;
-  background-color: #182034;
+  background-color: var(--theme-screen-bg);
   min-height: 75px;
   border-radius: 10px;
   display: -webkit-box;
@@ -113,7 +153,7 @@ header h3 {
   margin-top: 1rem;
   padding: 1.5rem;
   border-radius: 10px;
-  background-color: #232c43;
+  background-color: var(--theme-keypad-bg);
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr 1fr;
@@ -132,15 +172,22 @@ header h3 {
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
+  -webkit-transition: ease-in-out 50ms forwards;
+  transition: ease-in-out 50ms forwards;
 }
 
-.btn.white {
-  background-color: #eae3dc;
-  color: #232c43;
+.btn.num, .btn.op {
+  background-color: var(--theme-accentKey-bg);
+  color: var(--theme-text1);
   font-weight: bold;
-  -webkit-box-shadow: inset 0px -4px #b4a597;
-          box-shadow: inset 0px -4px #b4a597;
+  -webkit-box-shadow: inset 0px -4px var(--theme-accentKeyShadow-bg);
+          box-shadow: inset 0px -4px var(--theme-accentKeyShadow-bg);
   font-weight: 700;
+}
+
+.btn.num.press, .btn.op.press {
+  -webkit-box-shadow: inset 0px -1px var(--theme-accentKeyShadow-bg);
+          box-shadow: inset 0px -1px var(--theme-accentKeyShadow-bg);
 }
 
 .btn.reset {
@@ -150,11 +197,16 @@ header h3 {
 }
 
 .btn.equalTo {
-  background-color: #d03f2f;
-  -webkit-box-shadow: inset 0px -4px #93261a;
-          box-shadow: inset 0px -4px #93261a;
+  background-color: var(--theme-altKey-bg);
+  -webkit-box-shadow: inset 0px -1px var(--theme-alsKeyShadow-bg);
+          box-shadow: inset 0px -1px var(--theme-alsKeyShadow-bg);
   grid-column: 3 / -1;
   font-weight: 700;
+}
+
+.btn.equalTo.press {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .btn.del {
@@ -174,8 +226,63 @@ header h3 {
 
 .btn.accent {
   text-transform: uppercase;
-  background-color: #637097;
-  -webkit-box-shadow: inset 0px -4px #404e72;
-          box-shadow: inset 0px -4px #404e72;
+  background-color: var(--theme-key-bg);
+  -webkit-box-shadow: inset 0px -4px var(--theme-keyShadow-bg);
+          box-shadow: inset 0px -4px var(--theme-keyShadow-bg);
+}
+
+.btn.accent.press {
+  -webkit-box-shadow: inset 0px -1px var(--theme-keyShadow-bg);
+          box-shadow: inset 0px -1px var(--theme-keyShadow-bg);
+}
+
+.theme2 {
+  --theme-main-bg: hsl(0, 0%, 90%);
+  --theme-keypad-bg: hsl(0, 5%, 81%);
+  --theme-screen-bg: hsl(0, 0%, 93%);
+  --theme-key-bg: hsl(185, 42%, 37%);
+  --theme-keyShadow-bg: hsl(185, 58%, 25%);
+  --theme-altKey-bg: hsl(25, 98%, 40%);
+  --theme-alsKeyShadow-bg: hsl(25, 99%, 27%);
+  --theme-accentKey-bg: hsl(45, 7%, 89%);
+  --theme-accentKeyShadow-bg: hsl(35, 11%, 61%);
+  --theme-text1: hsl(60, 10%, 19%);
+  --theme-text2: hsl(0, 0%, 100%);
+  color: var(--theme-text1);
+}
+
+.theme2 .del, .theme2 .reset, .theme2 .equalTo {
+  color: var(--theme-text2);
+}
+
+.theme3 {
+  --theme-main-bg: hsl(268, 75%, 9%);
+  --theme-keypad-bg: hsl(268, 71%, 12%);
+  --theme-screen-bg: var(--theme-keypad-bg);
+  --theme-key-bg: hsl(281, 89%, 26%);
+  --theme-keyShadow-bg: hsl(285, 91%, 52%);
+  --theme-altKey-bg: hsl(176, 100%, 44%);
+  --theme-alsKeyShadow-bg: hsl(177, 92%, 70%);
+  --theme-accentKey-bg: hsl(268, 47%, 21%);
+  --theme-accentKeyShadow-bg: hsl(290, 70%, 36%);
+  --theme-text1: hsl(52, 100%, 62%);
+  --theme-text2: hsl(0, 0%, 100%);
+  --theme-text3: hsl(198, 20%, 13%);
+}
+
+body.theme3 {
+  color: var(--theme-text1);
+}
+
+body.theme3 .screen {
+  background-color: var(--theme-keypad-bg);
+}
+
+body.theme3 .del, body.theme3 .reset {
+  color: var(--theme-text2);
+}
+
+body.theme3 .equalTo {
+  color: var(--theme-text3);
 }
 /*# sourceMappingURL=style.css.map */
