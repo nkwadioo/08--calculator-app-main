@@ -9,14 +9,12 @@ let operant = '';
 let hasOperation = false;
 
 if (themeColor) {
-    if (themeColor !== 'theme1') {
-        const radioBtn = document.getElementById(themeColor);
-        radioBtn?.click();
-        document.body.classList.forEach( list => {
-            document.body.classList.remove(list);
-        });
-        document.body.classList.add(themeColor);
-    }
+    const radioBtn = document.getElementById(themeColor);
+    radioBtn?.click();
+    document.body.classList.forEach( list => {
+        document.body.classList.remove(list);
+    });
+    document.body.classList.add(themeColor);
 }
 
 function calculate() {
@@ -51,7 +49,6 @@ function calculate() {
 }
 
 function insetValue(value) {
-    // console.log(screen)
     // use regex to insert , per 1000 units
     // restrict having more than 1 decimal point
     if (!hasOperation) {
@@ -86,6 +83,7 @@ function doAction(value, classList) {
     }
 
     if (classList.contains('del')) {
+        // use regex to remove , per 1000 units
         if (variable2 !== '') {
             variable2 = variable2.substring(0, variable2.length - 1);
             return screen.innerHTML = variable2 || '0';
@@ -134,8 +132,7 @@ themes.forEach( radioBtn => {
     radioBtn.addEventListener('click', changeTheme);
 })
 
-// add number and symbol event listers
-
+// add number and symbol event listers using rgex
 document.addEventListener('keydown', (event) => {
     console.log(event);
     const eventCode = event.code.toLocaleLowerCase();
