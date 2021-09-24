@@ -10,6 +10,7 @@
     --theme-accentKeyShadow-bg: hsl(28, 16%, 65%);
     --theme-text1: hsl(221, 14%, 31%);
     --theme-text2: hsl(0, 0%, 100%);
+    --theme-history: var(--theme-screen-bg);
 }
 
 
@@ -29,6 +30,7 @@ body {
 .wrapper {
     max-width: 270px;
     margin: 2rem auto;
+    position: relative;
 }
 
 header {
@@ -119,7 +121,7 @@ header {
 
 
 .screen {
-    margin-top: 1rem;
+    // margin-top: 1rem;
     background-color: var(--theme-screen-bg);
     min-height: 75px;
     border-radius: 10px;
@@ -143,7 +145,41 @@ header {
 }
 
 .addOns {
+    margin: 0.5rem 0;
+    margin-left: auto;
+    width: fit-content;
+    padding: 5px;
+    box-shadow: -1px -3px 10px -7px;
+    border-radius: 5px;
+}
+
+.historyPage {
+    
+    text-align: end;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 30vh;
+    overflow-y: scroll;
+    flex-direction: column-reverse;
+    background-color: var(--theme-screen-bg); 
+    padding: 1rem .5rem;
+    max-width: 323px;
+    margin: auto;
     display: none;
+    border-radius: 0px 0 10px 10px;
+
+    &.show {
+        display: flex;
+    }
+
+    span {
+        display: block;
+        font-size: 28px;
+        margin-bottom: 1rem;
+    }
+
 }
 
 .btn {
@@ -251,4 +287,15 @@ body.theme3 {
         color: var(--theme-text3);
     }
 
+    svg path {
+        fill: var(--theme-text1);
+    }
+
+}
+
+@media (min-width: 980px) {
+    .historyPage {
+        right: -600px;
+        border-radius: 0px 0px 0px 10px;
+    }
 }

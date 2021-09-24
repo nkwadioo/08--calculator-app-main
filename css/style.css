@@ -10,6 +10,7 @@
   --theme-accentKeyShadow-bg: hsl(28, 16%, 65%);
   --theme-text1: hsl(221, 14%, 31%);
   --theme-text2: hsl(0, 0%, 100%);
+  --theme-history: var(--theme-screen-bg);
 }
 
 *, *::before, *::after {
@@ -28,6 +29,7 @@ body {
 .wrapper {
   max-width: 270px;
   margin: 2rem auto;
+  position: relative;
 }
 
 header {
@@ -131,7 +133,6 @@ header h3 {
 }
 
 .screen {
-  margin-top: 1rem;
   background-color: var(--theme-screen-bg);
   min-height: 75px;
   border-radius: 10px;
@@ -164,7 +165,47 @@ header h3 {
 }
 
 .addOns {
+  margin: 0.5rem 0;
+  margin-left: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  -webkit-box-shadow: -1px -3px 10px -7px;
+          box-shadow: -1px -3px 10px -7px;
+  border-radius: 5px;
+}
+
+.historyPage {
+  text-align: end;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 30vh;
+  overflow-y: scroll;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  background-color: var(--theme-screen-bg);
+  padding: 1rem .5rem;
+  max-width: 323px;
+  margin: auto;
   display: none;
+  border-radius: 0px 0 10px 10px;
+}
+
+.historyPage.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.historyPage span {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 1rem;
 }
 
 .btn {
@@ -284,5 +325,16 @@ body.theme3 .del, body.theme3 .reset {
 
 body.theme3 .equalTo {
   color: var(--theme-text3);
+}
+
+body.theme3 svg path {
+  fill: var(--theme-text1);
+}
+
+@media (min-width: 980px) {
+  .historyPage {
+    right: -600px;
+    border-radius: 0px 0px 0px 10px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

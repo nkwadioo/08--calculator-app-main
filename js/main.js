@@ -3,6 +3,9 @@ const buttons = document.querySelectorAll('.btn');
 const screen = document.querySelector('.screen');
 const themes = document.querySelectorAll('.theme input');
 const themeColor = localStorage.getItem('theme');
+const historyBtn = document.querySelector('#history');
+const historyPage = document.querySelector('.historyPage')
+
 let variable1 = '';
 let variable2 = '';
 let operant = '';
@@ -17,13 +20,27 @@ if (themeColor) {
     document.body.classList.add(themeColor);
 }
 
+const print = (expression) => {
+    ;
+    const div = document.createElement('div');
+    const span = document.createElement('span'); span.innerHTML = `${expression.total}`;
+    const small = document.createElement('small'); small.innerHTML = `${expression.equation}`;
+    div.appendChild(small);
+    div.appendChild(span);
+    historyPage.appendChild(div);
+    // setTimeout(() => {
+        // console.log(historyPage.scrollHeight)
+    historyPage.scrollTop = -historyPage.scrollHeight;
+    // }, 100);
+}
+
 function calculate() {
     if(!variable2) {
         return;
     }
     variable1 = +variable1;
     variable2 = +variable2;
-
+    let expression = {equation: `${variable1} ${operant} ${variable2} =`};
     switch (operant){
         case '+' :
             variable1 = ''+ (variable1 + variable2)
@@ -43,6 +60,8 @@ function calculate() {
             variable1 = ''+ (variable1 / variable2)
             break;
     }
+    expression.total = variable1;
+    print(expression);
     variable2 = '';
     screen.innerHTML = variable1;
     // hasOperation = false;
@@ -79,6 +98,8 @@ function doAction(value, classList) {
         operant = '';
         hasOperation = false;
         screen.innerHTML = '0';
+
+        historyPage.innerHTML = '';
         return;
     }
 
@@ -130,6 +151,11 @@ buttons.forEach( button => {
 
 themes.forEach( radioBtn => {
     radioBtn.addEventListener('click', changeTheme);
+})
+
+historyBtn.addEventListener('click', (event) => {
+    historyPage.classList.toggle('show');
+    historyPage.scrollTop = -historyPage.scrollHeight;
 })
 
 // add number and symbol event listers using rgex
