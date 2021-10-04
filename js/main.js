@@ -5,11 +5,15 @@ const themes = document.querySelectorAll('.theme input');
 const themeColor = localStorage.getItem('theme');
 const historyBtn = document.querySelector('#history');
 const historyPage = document.querySelector('.historyPage')
+const floatingPointRegex= new RegExp('^([0-9]+([.][0-9]*)?|[.][0-9]+)$');
+const numberOrPeriodRegex = new RegExp('^([.]|[0-9])$');
+const mathSymbols = new RegExp('[/|*|\-|+]');
 
 let variable1 = '';
 let variable2 = '';
 let operant = '';
 let hasOperation = false;
+
 
 if (themeColor) {
     const radioBtn = document.getElementById(themeColor);
@@ -67,15 +71,43 @@ function calculate() {
     // hasOperation = false;
 }
 
+function reset() {
+    variable1 = '';
+    variable2 = '';
+    operant = '';
+    hasOperation = false;
+    screen.innerHTML = '0';
+    historyPage.innerHTML = '';
+}
+
+function del() {
+    // use regex to remove , per 1000 units
+    if (variable2 !== '') {
+        variable2 = variable2.substring(0, variable2.length - 1);
+        return screen.innerHTML = variable2 || '0';
+    }
+    if (variable1 !== '') {
+        variable1 = variable1.substring(0, variable1.length - 1);
+        return screen.innerHTML = variable1 || '0';
+    }
+}
+
 function insetValue(value) {
     // use regex to insert , per 1000 units
     // restrict having more than 1 decimal point
     if (!hasOperation) {
+        if (!floatingPointRegex.test(variable1 + value)) {
+            return
+        }
         variable1 += value;
         screen.innerHTML = variable1;
     } else {
+        if (!floatingPointRegex.test(variable2 + value)) {
+            return
+        }
         variable2 += value;
         screen.innerHTML = variable2;
+        
     }
 }
 
@@ -93,26 +125,11 @@ function doAction(value, classList) {
     }
 
     if (classList.contains('reset')) {
-        variable1 = '';
-        variable2 = '';
-        operant = '';
-        hasOperation = false;
-        screen.innerHTML = '0';
-
-        historyPage.innerHTML = '';
-        return;
+        reset();
     }
 
     if (classList.contains('del')) {
-        // use regex to remove , per 1000 units
-        if (variable2 !== '') {
-            variable2 = variable2.substring(0, variable2.length - 1);
-            return screen.innerHTML = variable2 || '0';
-        }
-        if (variable1 !== '') {
-            variable1 = variable1.substring(0, variable1.length - 1);
-            return screen.innerHTML = variable1 || '0';
-        }
+        del();
     }
 
 }
@@ -162,7 +179,21 @@ historyBtn.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
     console.log(event);
     const eventCode = event.code.toLocaleLowerCase();
-    if (eventCode.includes('digit') || eventCode.includes('numpad') || eventCode == 'enter') {
+    const key = event.key;
+    const isNumber = numberOrPeriodRegex.test(key); // check for .123 or 123.122333 not 123.123.23
+    const isSymbol = mathSymbols.test(key)
+    if (isNumber) {
         insetValue(event.key)
+    } else if (isSymbol || key === '-') {
+        insetOperation(key);
+    } else if (key === 'Enter') {
+        calculate();
+    } else if (key === 'Backspace') {
+        reset();
+    } else if (key === 'Delete') {
+        del(); 
     }
+    // if (eventCode.includes('digit') || eventCode.includes('numpad') || eventCode == 'enter') {
+    //     insetValue(event.key)
+    // }
 })
